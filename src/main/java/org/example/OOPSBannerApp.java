@@ -1,30 +1,53 @@
 package org.example;
 
 /**
- * OOPSBannerApp UC2 - Render OOPS as Banner (spaces and *)
+ * OOPSBannerApp - OOPS Banner Application (Use Case 3)
  *
- * This Class demostrates the creation of ASSCII art banner using Object-Oriented Programming Principles
- * It extends the basic banner concept by displaying the word "OOPS" in a visual format using asterisks(*)
- * and spaces to form each letter
+ * This class extends User Story 2 to display the "OOPS" banner using a modular approach
+ * by implementing the Single Responsibility Principle (SRP) and Method Extraction.
  *
- *
+ * String arrays representing ASCII art for letters O, P, and S are generated
+ * and combined horizontally to create the visual "OOPS" message.
  *
  * @author seetharamaraju
- * @version 2.0
+ * @version 3.0
  */
 
-/**
- *  Extend the User Story 1 to display the message "OOPS" in a banner format
- *  Using characters formed by spaces and asterisks(*) to create a visual
- *  effect for each letter in the message.
- */
+
 public class OOPSBannerApp {
     // Main Method to run the banner display
     public static void main(String[] args) {
 
-        // Define String Array variable to hold the oops banner lines
-        // Each line represents a row in the banner for the letters O,O,P,S
-        String[] O = {
+        String[][] banner = buildPattern();
+        printPattern(banner);
+    }
+
+    // Builds the complete OOPS banner pattern
+    static String[][] buildPattern() {
+        return new String[][]{
+                getOPattern(),
+                getOPattern(),
+                getPPattern(),
+                getSPattern()
+        };
+    }
+
+    // Prints the banner line by line
+    static void printPattern(String[][] banner) {
+        for (int row = 0; row < banner[0].length; row++) {
+            String line = "";
+
+            for (String[] letter : banner) {
+                line = line + letter[row] + "   ";
+            }
+
+            System.out.println(line);
+        }
+    }
+
+    // Pattern for letter O
+    static String[] getOPattern() {
+        return new String[]{
                 " ***** ",
                 "*     *",
                 "*     *",
@@ -33,8 +56,11 @@ public class OOPSBannerApp {
                 "*     *",
                 " ***** "
         };
+    }
 
-        String[] P = {
+    // Pattern for letter P
+    static String[] getPPattern() {
+        return new String[]{
                 "****** ",
                 "*     *",
                 "*     *",
@@ -43,8 +69,11 @@ public class OOPSBannerApp {
                 "*      ",
                 "*      "
         };
+    }
 
-        String[] S = {
+    // Pattern for letter S
+    static String[] getSPattern() {
+        return new String[]{
                 " ***** ",
                 "*      ",
                 "*      ",
@@ -53,15 +82,5 @@ public class OOPSBannerApp {
                 "      *",
                 " ***** "
         };
-
-        // Banner height is 7
-        for (int i = 0; i < 7; i++) {
-            String line = String.join("   ",
-                    O[i], O[i], P[i], S[i]);
-            System.out.println(line);
-        }
-
     }
-
-
 }
